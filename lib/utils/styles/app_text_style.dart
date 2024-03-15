@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_all_projects/utils/colors/app_colors.dart';
+
+import '../colors/app_colors.dart';
 
 class AppTextStyle {
   //Inter

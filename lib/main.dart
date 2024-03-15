@@ -1,10 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_all_projects/screens/global_screen/global_screen.dart';
-import 'package:my_all_projects/utils/colors/app_colors.dart';
+import 'package:my_all_projects/view_models/first_view_model.dart';
+import 'package:my_all_projects/view_models/second_view_model.dart';
+import 'package:provider/provider.dart';
+
+import 'data/repositories/first_repo.dart';
+import 'data/repositories/second_repo.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => FirstViewModel(
+            firstRepo: FirstRepo(),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => SecondViewModel(
+            secondRepo: SecondRepo(),
+          ),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -14,8 +35,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(
-        428,
-        926,
+        326,
+        812,
       ),
       builder: (context, child) {
         ScreenUtil.init(context);
@@ -23,7 +44,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             useMaterial3: true,
-            scaffoldBackgroundColor: AppColors.white,
+            scaffoldBackgroundColor: Colors.grey,
           ),
           home: child,
         );
