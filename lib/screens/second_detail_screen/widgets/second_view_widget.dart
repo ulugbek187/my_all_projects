@@ -31,9 +31,7 @@ class SecondViewWidget extends StatelessWidget {
         fontWeight: FontWeight.w900,
       ),
       subtitleTextStyle: AppTextStyle.interBold.copyWith(
-        color: AppColors.black.withOpacity(
-          0.5,
-        ),
+        color: AppColors.black,
         fontSize: 16.sp,
         fontWeight: FontWeight.w500,
       ),
