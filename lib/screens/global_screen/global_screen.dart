@@ -1,22 +1,22 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:my_all_projects/utils/colors/app_colors.dart';
+import 'dart:async';
 
-class GlobalScreen extends StatefulWidget {
-  const GlobalScreen({super.key});
+import 'package:flutter/foundation.dart';
 
-  @override
-  State<GlobalScreen> createState() => _GlobalScreenState();
-}
 
-class _GlobalScreenState extends State<GlobalScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return AnnotatedRegion(
-      value: SystemUiOverlayStyle(statusBarColor: AppColors.transparent),
-      child: Scaffold(),
-    );
+class CounterProvider extends ChangeNotifier {
+  int value = 0;
+
+
+  Future<void> incremenet()async{
+
+    while(true){
+      await Future.delayed(Duration(microseconds: 001));
+      value++;
+      notifyListeners();
+    }
   }
 }
+
+

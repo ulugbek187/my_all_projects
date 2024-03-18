@@ -1,34 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_all_projects/screens/global_screen/global_screen.dart';
-import 'package:my_all_projects/utils/colors/app_colors.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => CounterProvider()..incremenet(),
+      child: const MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(
-        428,
-        926,
-      ),
-      builder: (context, child) {
-        ScreenUtil.init(context);
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            useMaterial3: false,
-            scaffoldBackgroundColor: AppColors.white,
+    return MaterialApp(
+      title: 'Flutter Provider Example',
+      home: Scaffold(
+        body: Center(
+          child: Consumer<CounterProvider>(
+            builder: (context, counterProvider, _) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Counter Value:',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Text(
+                    '${counterProvider.value}',
+                    style: const TextStyle(
+                        fontSize: 40, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              );
+            },
           ),
-          home: child,
-        );
-      },
-      child: const GlobalScreen(),
+        ),
+      ),
     );
   }
 }
