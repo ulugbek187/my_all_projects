@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:my_all_projects/utils/colors/app_colors.dart';
 
 class ButtonItems extends StatelessWidget {
   const ButtonItems({
@@ -24,14 +23,14 @@ class ButtonItems extends StatelessWidget {
           horizontal: 5.w,
           vertical: 5.h,
         ),
-        decoration:  BoxDecoration(
+        decoration:  const BoxDecoration(
           color: Colors.orange,
           shape: BoxShape.circle,
         ),
         child: Center(
           child: SvgPicture.asset(
             imageUrl,
-            color: Colors.white,
+            color: Colors.black,
             // width: 15.w,
             // height: 15.h,
           ),

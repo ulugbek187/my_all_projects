@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_all_projects/utils/styles/app_text_style.dart';
 
-class SecondButtonItems extends StatelessWidget {
-  const SecondButtonItems({
+class SecondItems extends StatelessWidget {
+  const SecondItems({
     super.key,
     required this.text,
     required this.onTap,

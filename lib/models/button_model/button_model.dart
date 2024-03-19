@@ -1,35 +1,35 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_all_projects/utils/images/app_images.dart';
 
-class ButtonModel {
+class ItemsModel {
   final String image;
   final double height;
   final double width;
 
-  ButtonModel({
+  ItemsModel({
     required this.height,
     required this.width,
     required this.image,
   });
 }
 
-final List<ButtonModel> buttonModels = [
-  ButtonModel(
+final List<ItemsModel> buttonModels = [
+  ItemsModel(
     height: 20.h,
     width: 20.w,
     image: AppImages.clear,
   ),
-  ButtonModel(
+  ItemsModel(
     height: 30.h,
     width: 20.w,
     image: AppImages.precent,
   ),
-  ButtonModel(
+  ItemsModel(
     height: 30.h,
     width: 30.w,
     image: AppImages.delete,
   ),
-  ButtonModel(
+  ItemsModel(
     height: 30.h,
     width: 20.w,
     image: AppImages.divide,

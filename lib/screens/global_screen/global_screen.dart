@@ -1,29 +1,27 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_all_projects/global_widgets/button_items.dart';
+import 'package:my_all_projects/global_widgets/result_item.dart';
+import 'package:my_all_projects/global_widgets/second_button_items.dart';
 import 'package:my_all_projects/models/button_model/button_model.dart';
-import 'package:my_all_projects/screens/global_screen/widgets/button_items.dart';
-import 'package:my_all_projects/screens/global_screen/widgets/result_item.dart';
-import 'package:my_all_projects/screens/global_screen/widgets/second_button_items.dart';
 import 'package:my_all_projects/utils/colors/app_colors.dart';
 import 'package:my_all_projects/utils/images/app_images.dart';
 import 'package:my_all_projects/view_models/calculator_view_model.dart';
 import 'package:provider/provider.dart';
 
-class GlobalScreen extends StatefulWidget {
-  const GlobalScreen({super.key});
+class CalculatorScreen extends StatefulWidget {
+  const CalculatorScreen({super.key});
 
   @override
-  State<GlobalScreen> createState() => _GlobalScreenState();
+  State<CalculatorScreen> createState() => _CalculatorScreenState();
 }
 
-class _GlobalScreenState extends State<GlobalScreen> {
+class _CalculatorScreenState extends State<CalculatorScreen> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
-      value: SystemUiOverlayStyle(
+      value: const SystemUiOverlayStyle(
         statusBarColor: AppColors.transparent,
       ),
       child: Scaffold(
@@ -36,7 +34,7 @@ class _GlobalScreenState extends State<GlobalScreen> {
                 padding: EdgeInsets.only(
                   top: 200.h,
                 ),
-                child: ResultItem(),
+                child: const JavoblarItem(),
               ),
             ),
             Align(
@@ -70,19 +68,19 @@ class _GlobalScreenState extends State<GlobalScreen> {
                             imageUrl: buttonModels[index].image,
                             onTap: () {
                               if (index == 0) {
-                                context.read<CalculatorViewModel>().clear();
+                                context.read<ViewModel>().clear();
                               }
                               if (index == 1) {
                                 context
-                                    .read<CalculatorViewModel>()
+                                    .read<ViewModel>()
                                     .divideByPercentage();
                               }
                               if (index == 2) {
-                                context.read<CalculatorViewModel>().backspace();
+                                context.read<ViewModel>().backspace();
                               }
                               if (index == 3) {
                                 context
-                                    .read<CalculatorViewModel>()
+                                    .read<ViewModel>()
                                     .appendOperator("/");
                               }
                             },
@@ -95,10 +93,10 @@ class _GlobalScreenState extends State<GlobalScreen> {
                       children: [
                         ...List.generate(
                           firstButtonModel.length,
-                          (index) => SecondButtonItems(
+                          (index) => SecondItems(
                             text: firstButtonModel[index],
                             onTap: () {
-                              context.read<CalculatorViewModel>().appendDigit(
+                              context.read<ViewModel>().appendDigit(
                                     firstButtonModel[index],
                                   );
                             },
@@ -108,7 +106,7 @@ class _GlobalScreenState extends State<GlobalScreen> {
                           imageUrl: AppImages.multiply,
                           onTap: () {
                             context
-                                .read<CalculatorViewModel>()
+                                .read<ViewModel>()
                                 .appendOperator("*");
                           },
                         ),
@@ -119,10 +117,10 @@ class _GlobalScreenState extends State<GlobalScreen> {
                       children: [
                         ...List.generate(
                           firstButtonModel.length,
-                          (index) => SecondButtonItems(
+                          (index) => SecondItems(
                             text: secondButtonModel[index],
                             onTap: () {
-                              context.read<CalculatorViewModel>().appendDigit(
+                              context.read<ViewModel>().appendDigit(
                                     secondButtonModel[index],
                                   );
                             },
@@ -132,7 +130,7 @@ class _GlobalScreenState extends State<GlobalScreen> {
                           imageUrl: AppImages.subtract,
                           onTap: () {
                             context
-                                .read<CalculatorViewModel>()
+                                .read<ViewModel>()
                                 .appendOperator("-");
                           },
                         ),
@@ -143,10 +141,10 @@ class _GlobalScreenState extends State<GlobalScreen> {
                       children: [
                         ...List.generate(
                           firstButtonModel.length,
-                          (index) => SecondButtonItems(
+                          (index) => SecondItems(
                             text: thirdButtonModel[index],
                             onTap: () {
-                              context.read<CalculatorViewModel>().appendDigit(
+                              context.read<ViewModel>().appendDigit(
                                     thirdButtonModel[index],
                                   );
                             },
@@ -156,7 +154,7 @@ class _GlobalScreenState extends State<GlobalScreen> {
                           imageUrl: AppImages.add,
                           onTap: () {
                             context
-                                .read<CalculatorViewModel>()
+                                .read<ViewModel>()
                                 .appendOperator("+");
                           },
                         ),
@@ -167,10 +165,10 @@ class _GlobalScreenState extends State<GlobalScreen> {
                       children: [
                         ...List.generate(
                           fourthButtonModel.length,
-                          (index) => SecondButtonItems(
+                          (index) => SecondItems(
                             text: fourthButtonModel[index],
                             onTap: () {
-                              context.read<CalculatorViewModel>().appendDigit(
+                              context.read<ViewModel>().appendDigit(
                                     fourthButtonModel[index],
                                   );
                             },
@@ -184,7 +182,7 @@ class _GlobalScreenState extends State<GlobalScreen> {
                           imageUrl: AppImages.equal,
                           onTap: () {
                             context
-                                .read<CalculatorViewModel>()
+                                .read<ViewModel>()
                                 .calculateResult();
                           },
                         ),

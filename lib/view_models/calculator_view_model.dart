@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class CalculatorViewModel with ChangeNotifier {
+class ViewModel with ChangeNotifier {
   String _displayValue = '0';
   double _result = 0;
   String _operator = '';
@@ -19,7 +19,6 @@ class CalculatorViewModel with ChangeNotifier {
         _displayValue += digit;
       }
     }
-    debugPrint("====================$_displayValue===================");
     notifyListeners();
   }
 
@@ -54,18 +53,6 @@ class CalculatorViewModel with ChangeNotifier {
     _shouldClearDisplay = true;
     notifyListeners();
   }
-  // void precentResult() {
-  //   final currentValue = double.parse(_displayValue);
-  //   switch (_operator) {
-  //     case '%':
-  //       _result /= currentValue;
-  //       break;
-  //   }
-  //   _displayValue = _result.toString();
-  //   _operator = '';
-  //   _shouldClearDisplay = true;
-  //   notifyListeners();
-  // }
 
   void divideByPercentage() {
     final currentValue = double.parse(_displayValue);
@@ -74,15 +61,6 @@ class CalculatorViewModel with ChangeNotifier {
     _shouldClearDisplay = true;
     notifyListeners();
   }
-
-  // void multiply() {
-  //   final currentValue = double.parse(_displayValue);
-  //   _displayValue = currentValue;
-  //   _currentOperator = Operator.multiply;
-  //   _shouldClearDisplay = true;
-  //   notifyListeners();
-  // }
-
 
   void clear() {
     _displayValue = '0';

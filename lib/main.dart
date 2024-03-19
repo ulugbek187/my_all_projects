@@ -10,7 +10,7 @@ void main() {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
-        create: (_) => CalculatorViewModel(),
+        create: (_) => ViewModel(),
       ),
     ],
     child: const MyApp(),
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const GlobalScreen(),
+      child: const CalculatorScreen(),
     );
   }
 }
