@@ -2,9 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_all_projects/screens/global_screen/global_screen.dart';
 import 'package:my_all_projects/utils/colors/app_colors.dart';
+import 'package:provider/provider.dart';
+
+import 'view_models/calculator_view_model.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (_) => CalculatorViewModel(),
+      ),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,8 +24,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(
-        428,
-        926,
+        320,
+        568,
       ),
       builder: (context, child) {
         ScreenUtil.init(context);
