@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_all_projects/utils/colors/app_colors.dart';
 import 'package:my_all_projects/utils/styles/app_text_style.dart';
 
 class SecondButtonItems extends StatelessWidget {
@@ -25,7 +24,7 @@ class SecondButtonItems extends StatelessWidget {
           vertical: 5.h,
         ),
         decoration: const BoxDecoration(
-          color: Colors.grey,
+          color: Colors.white,
           shape: BoxShape.circle,
         ),
         child: Center(

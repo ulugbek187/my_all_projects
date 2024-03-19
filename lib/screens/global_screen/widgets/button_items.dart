@@ -25,15 +25,15 @@ class ButtonItems extends StatelessWidget {
           vertical: 5.h,
         ),
         decoration:  BoxDecoration(
-          color: Colors.grey,
+          color: Colors.orange,
           shape: BoxShape.circle,
         ),
         child: Center(
           child: SvgPicture.asset(
             imageUrl,
-            color: Colors.black,
-            // width: 20.w,
-            // height: 35.h,
+            color: Colors.white,
+            // width: 15.w,
+            // height: 15.h,
           ),
         ),
       ),
