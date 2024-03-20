@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
     User? user = FirebaseAuth.instance.currentUser;
 
     Future.microtask(() {
-      if (user!.uid.isNotEmpty) {
+      if (user != null) {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -124,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => UserScreen(),
+                          builder: (context) => const UserScreen(),
                         ),
                       );
                     } else {
