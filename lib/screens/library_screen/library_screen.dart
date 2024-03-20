@@ -198,7 +198,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                         height: 10.h,
                       ),
                       SizedBox(
-                        height: 450.h,
+                        height: 360.h,
                         child: ListView(
                           scrollDirection: Axis.vertical,
                           children: [
