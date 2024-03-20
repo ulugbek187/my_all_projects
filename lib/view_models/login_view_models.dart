@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_all_projects/screen/hello_screen/hello_screen.dart';
 
@@ -18,7 +17,7 @@ class LoginViewModel extends ChangeNotifier {
   login(BuildContext context) async {
     try {
       final credential =
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
