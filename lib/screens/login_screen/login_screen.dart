@@ -2,11 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_all_projects/others/app_reg_exp.dart';
-import 'package:my_all_projects/screen/hello_screen/hello_screen.dart';
-import 'package:my_all_projects/screen/login_screen/widgets/text_field.dart';
-import 'package:my_all_projects/view_models/login_view_models.dart';
+import 'package:my_all_projects/main.dart';
+import 'package:my_all_projects/screens/library/library_screen.dart';
+import 'package:my_all_projects/screens/login_screen/widgets/my_text_field.dart';
 import 'package:provider/provider.dart';
+
+import '../../utils/reg_exp/app_constans.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -29,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const UserScreen(),
+            builder: (context) => const LibraryScreen(),
           ),
         );
       }
@@ -124,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const UserScreen(),
+                          builder: (context) => const LibraryScreen(),
                         ),
                       );
                     } else {

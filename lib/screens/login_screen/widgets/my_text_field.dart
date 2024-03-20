@@ -56,8 +56,12 @@ class MyTextField extends StatelessWidget {
             color: Colors.red,
           ),
         ),
-        focusedErrorBorder: const OutlineInputBorder(
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
           borderSide: BorderSide(
+            width: 1,
             color: Colors.orange,
           ),
         ),
@@ -68,6 +72,7 @@ class MyTextField extends StatelessWidget {
             color: Colors.white,
           ),
         ),
+
         focusedBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(10),
@@ -79,13 +84,13 @@ class MyTextField extends StatelessWidget {
         ),
         prefixIcon: iconPath.isNotEmpty
             ? Padding(
-                padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
-                child: SvgPicture.asset(
-                  iconPath,
-                  width: 13.w,
-                  height: 12.h,
-                ),
-              )
+          padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
+          child: SvgPicture.asset(
+            iconPath,
+            width: 13.w,
+            height: 12.h,
+          ),
+        )
             : null,
         hintText: hinText,
         hintStyle: const TextStyle(
