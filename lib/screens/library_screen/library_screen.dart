@@ -198,9 +198,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                         height: 10.h,
                       ),
                       SizedBox(
-                        height: 190.h,
+                        height: 450.h,
                         child: ListView(
-                          scrollDirection: Axis.horizontal,
+                          scrollDirection: Axis.vertical,
                           children: [
                             ...List.generate(
                               context.watch<BookViewModel>().allBooks.length,

@@ -19,7 +19,7 @@ class GetItems extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: SizedBox(
-        width: 150.w,
+        width: 450.h,
         child: Column(
           children: [
             ClipRRect(
@@ -30,8 +30,8 @@ class GetItems extends StatelessWidget {
                     const Center(child: CircularProgressIndicator()),
                 errorWidget: (context, imageUrl, error) =>
                     const Icon(Icons.error),
-                width: 140.w,
-                height: 150.h,
+                width: 280.w,
+                height: 250.h,
                 fit: BoxFit.fill,
               ),
             ),
@@ -47,7 +47,7 @@ class GetItems extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
-                  fontSize: 14.sp,
+                  fontSize: 20.sp,
                 ),
               ),
             )
