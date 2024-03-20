@@ -4,9 +4,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_all_projects/data/repositories/book_repo.dart';
+import 'package:my_all_projects/firebase_options.dart';
 import 'package:my_all_projects/screens/library/library_screen.dart';
 import 'package:my_all_projects/screens/login_screen/login_screen.dart';
-import 'package:my_all_projects/virebase_options.dart';
 import 'package:provider/provider.dart';
 import 'view_models/book_view_model.dart';
 
@@ -97,9 +97,7 @@ class LoginViewModel extends ChangeNotifier {
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
       }
     } catch (e) {
       print(e);
