@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_all_projects/screens/global_screen/global_screen.dart';
-import 'package:my_all_projects/utils/colors/app_colors.dart';
+import 'package:my_all_projects/screen/login_screen/login_screen.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -13,22 +13,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(
-        428,
-        926,
-      ),
+      designSize: const Size(375, 812),
       builder: (context, child) {
         ScreenUtil.init(context);
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            useMaterial3: false,
-            scaffoldBackgroundColor: AppColors.white,
+            appBarTheme: const AppBarTheme(
+              elevation: 0,
+            ),
           ),
           home: child,
         );
       },
-      child: const GlobalScreen(),
+      child: const LoginScreen(),
     );
   }
 }
