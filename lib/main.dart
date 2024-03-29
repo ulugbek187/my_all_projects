@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_all_projects/screens/google_maps_screen.dart';
 import 'package:my_all_projects/screens/splash_screen.dart';
 import 'package:my_all_projects/utils/colors/app_colors.dart';
 import 'package:my_all_projects/view_models/location_view_model.dart';
@@ -11,6 +12,7 @@ void main() {
 
   runApp(MultiProvider(
     providers: [
+      ChangeNotifierProvider(create: (_) => LocationViewModel()),
       ChangeNotifierProvider(create: (_) => LocationViewModel()),
       ChangeNotifierProvider(create: (_) => MapsViewModel()),
     ],
