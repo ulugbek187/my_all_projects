@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter/material.dart';
 import 'package:my_all_projects/data/models/place_category.dart';
 import 'package:my_all_projects/data/models/place_model.dart';
-import 'package:my_all_projects/view_models/maps_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:my_all_projects/screens/maps/dialogs/text_field.dart';
 
 addressDetailDialog({
   required BuildContext context,
@@ -21,25 +21,39 @@ addressDetailDialog({
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(
-              controller: controller,
+            SizedBox(
+              height: 20.h,
             ),
-            const SizedBox(height: 24),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: MyTextField(
+                  type: TextInputType.text,
+                  hinText: "Save address",
+                  onChanged: (v) {},
+                  controller: controller),
+            ),
+            SizedBox(height: 16.h),
             TextButton(
-                onPressed: () {
-                  placeModel.call(
-                    PlaceModel(
-                      entrance: "",
-                      flatNumber: "",
-                      orientAddress: "",
-                      placeCategory: PlaceCategory.home,
-                      latLng: const LatLng(0, 0),
-                      placeName: "a",
-                      stage: "",
-                    ),
-                  );
-                },
-                child: const Text("SAVE PLACE"))
+              style: TextButton.styleFrom(backgroundColor: Colors.blue),
+              onPressed: () {
+                placeModel.call(
+                  PlaceModel(
+                    entrance: "",
+                    flatNumber: "",
+                    orientAddress: "",
+                    placeCategory: PlaceCategory.home,
+                    latLng: const LatLng(0, 0),
+                    placeName: "a",
+                    stage: "",
+                  ),
+                );
+              },
+              child: const Text(
+                "SAVE PLACE",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            SizedBox(height: 16.h),
           ],
         ),
       );

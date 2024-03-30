@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:my_all_projects/screens/addresses/addresses_screen.dart';
 import 'package:my_all_projects/utils/colors/app_colors.dart';
@@ -36,14 +37,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     context.read<MapsViewModel>();
-    return Scaffold(
-      backgroundColor: AppColors.white,
-      appBar: AppBar(
-        title: Text("Deafult"),
-      ),
-      body: Center(
-        child: Lottie.asset(
-          AppImages.mapsLottie,
+    return AnnotatedRegion(
+      value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+      child: Scaffold(
+        backgroundColor: AppColors.white,
+        body: Center(
+          child: Lottie.asset(
+            AppImages.mapsLottie,
+          ),
         ),
       ),
     );

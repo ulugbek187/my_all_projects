@@ -18,7 +18,11 @@ class _AddressesScreenState extends State<AddressesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("May Addresses"),
+        backgroundColor: Colors.blue,
+        centerTitle: true,
+        title: const Text("Saved addresses", style: TextStyle(
+          color: Colors.yellow,
+        ),),
       ),
       body: Column(
         children: [
@@ -84,7 +88,9 @@ class _AddressesScreenState extends State<AddressesScreen> {
                                           myAddress.placeName,
                                           maxLines: 3,
                                           overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(color: Colors.blue, fontSize: 10.sp),
+                                          style: TextStyle(
+                                              color: Colors.blue,
+                                              fontSize: 10.sp),
                                         ),
                                       ),
                                     ],
@@ -97,7 +103,9 @@ class _AddressesScreenState extends State<AddressesScreen> {
                                       size: 35.w,
                                     ),
                                   ),
-                                  SizedBox(width: 10.w,),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
                                 ],
                               ),
                             ),
