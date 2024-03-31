@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:my_all_projects/screens/addresses/addresses_screen.dart';
 import 'package:my_all_projects/utils/colors/app_colors.dart';
@@ -16,16 +15,21 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   _init() async {
-    await Future.delayed(const Duration(seconds: 10));
-
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return AddressesScreen();
-        },
+    await Future.delayed(
+      const Duration(
+        seconds: 3,
       ),
     );
+    if (mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return const AddressesScreen();
+          },
+        ),
+      );
+    }
   }
 
   @override
@@ -37,14 +41,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     context.read<MapsViewModel>();
-    return AnnotatedRegion(
-      value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-      child: Scaffold(
-        backgroundColor: AppColors.white,
-        body: Center(
-          child: Lottie.asset(
-            AppImages.mapsLottie,
-          ),
+    return Scaffold(
+      backgroundColor: AppColors.white,
+      body: Center(
+        child: Lottie.asset(
+          AppImages.mapsLottie,
         ),
       ),
     );

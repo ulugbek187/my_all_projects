@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:my_all_projects/data/models/place_category.dart';
 import 'package:my_all_projects/data/models/place_model.dart';
-import 'package:my_all_projects/screens/maps/dialogs/addressDetailDialog.dart';
 import 'package:my_all_projects/screens/widgets/map_type_item.dart';
 import 'package:my_all_projects/utils/images/app_images.dart';
 import 'package:my_all_projects/utils/styles/app_text_style.dart';
-import 'package:my_all_projects/view_models/addressess_view_model.dart';
 import 'package:my_all_projects/view_models/maps_view_model.dart';
 import 'package:provider/provider.dart';
 
 class UpdateAddressScreen extends StatefulWidget {
   const UpdateAddressScreen({
     super.key,
-    required this.placeModel,
+    required this.placeModel, required this.onTap,
   });
+
+  final VoidCallback onTap;
 
   final PlaceModel placeModel;
 
@@ -28,7 +27,12 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
     context.read<MapsViewModel>().currentPlaceName =
         widget.placeModel.placeName;
 
-    context.read<MapsViewModel>().setLatInitialLong(widget.placeModel.latLng);
+    context.read<MapsViewModel>().setLatInitialLong(
+          LatLng(
+            double.parse(widget.placeModel.lat),
+            double.parse(widget.placeModel.long),
+          ),
+        );
     super.initState();
   }
 
@@ -55,7 +59,7 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
                       "CURRENT POSITION:${currentCameraPosition.target.longitude}");
                 },
                 mapType: viewModel.mapType,
-                initialCameraPosition: viewModel.initialCameraPosition!,
+                initialCameraPosition: viewModel.initialCameraPosition,
                 onMapCreated: (GoogleMapController createdController) {
                   viewModel.controller.complete(createdController);
                 },
@@ -94,21 +98,6 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
             child: const Icon(Icons.gps_fixed),
           ),
           const SizedBox(width: 20),
-          FloatingActionButton(
-            onPressed: () {
-              addressDetailDialog(
-                context: context,
-                placeModel: (newAddressDetails) {
-                  PlaceModel place = newAddressDetails;
-                  place.latLng = cameraPosition!.target;
-                  place.placeCategory = PlaceCategory.work;
-                  context.read<AddressesViewModel>().addNewAddress(place);
-                  Navigator.pop(context);
-                },
-              );
-            },
-            child: const Icon(Icons.place),
-          ),
           const SizedBox(width: 20),
           const MapTypeItem(),
         ],

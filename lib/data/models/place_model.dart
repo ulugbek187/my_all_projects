@@ -1,88 +1,67 @@
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:my_all_projects/data/models/place_category.dart';
-
 class PlaceModel {
   PlaceModel({
-    this.id,
     required this.placeCategory,
-    required this.latLng,
+    required this.lat,
+    required this.long,
     required this.placeName,
-    required this.entrance,
-    required this.flatNumber,
-    required this.orientAddress,
-    required this.stage,
+    required this.image,
+    required this.docId,
   });
 
-  final int? id;
-  LatLng latLng;
-  final String placeName;
-  PlaceCategory placeCategory;
-  final String entrance;
-  final String stage;
-  final String flatNumber;
-  final String orientAddress;
+  String docId;
+  String lat;
+  String image;
+  String long;
+  String placeName;
+  String placeCategory;
 
   factory PlaceModel.fromJson(Map<String, dynamic> json) {
     return PlaceModel(
-      id: json['id'],
-      placeCategory: _parsePlaceCategory(json['placeCategory']),
-      entrance: json['entrance'],
-      stage: json['stage'],
-      flatNumber: json['flatNumber'],
-      orientAddress: json['orientAddress'],
-      latLng: json['latlng'],
-      placeName: json['place_name'],
+      placeName: json['place_name'] as String? ?? "",
+      placeCategory: json['place_category'] as String? ?? "",
+      lat: json['lat'] as String? ?? "",
+      long: json['long'] as String? ?? "",
+      docId: json['doc_id'] as String? ?? '',
+      image: json['image'] as String? ?? '',
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'placeCategory': _enumToString(placeCategory),
-      'placeName': placeName,
-      'entrance': entrance,
-      'stage': stage,
-      'flatNumber': flatNumber,
-      'orientAddress': orientAddress,
-      'latlng': latLng,
+      'place_name': placeName,
+      'image': image,
+      'place_category': placeCategory,
+      'lat': lat,
+      'long': long,
+      'doc_id': docId,
     };
   }
 
-  static PlaceCategory _parsePlaceCategory(String category) {
-    switch (category) {
-      case 'work':
-        return PlaceCategory.work;
-      case 'home':
-        return PlaceCategory.home;
-      case 'other':
-        return PlaceCategory.other;
-      default:
-        throw ArgumentError('Invalid place category: $category');
-    }
-  }
-
-  static String _enumToString(PlaceCategory category) {
-    return category.toString().split('.').last;
+  Map<String, dynamic> toJsonForUpdate() {
+    return {
+      'place_name': placeName,
+      'image': image,
+      'place_category': placeCategory,
+      'lat': lat,
+      'long': long,
+    };
   }
 
   PlaceModel copyWith({
-    int? id,
-    PlaceCategory? placeCategory,
     String? placeName,
-    String? entrance,
-    String? stage,
-    String? flatNumber,
-    String? orientAddress,
+    String? placeCategory,
+    String? lat,
+    String? long,
+    String? docId,
+    String? image,
   }) {
     return PlaceModel(
-      id: id ?? this.id,
-      placeCategory: placeCategory ?? this.placeCategory,
       placeName: placeName ?? this.placeName,
-      entrance: entrance ?? this.entrance,
-      stage: stage ?? this.stage,
-      flatNumber: flatNumber ?? this.flatNumber,
-      orientAddress: orientAddress ?? this.orientAddress,
-      latLng: latLng ?? this.latLng,
+      placeCategory: placeCategory ?? this.placeCategory,
+      lat: lat ?? this.lat,
+      long: long ?? this.long,
+      docId: docId ?? this.docId,
+      image: image ?? this.image,
     );
   }
 }
