@@ -133,85 +133,17 @@ class _AddressesScreenState extends State<AddressesScreen> {
                                     children: [
                                       GestureDetector(
                                         onTap: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  backgroundColor:
-                                                      AppColors.white,
-                                                  title: const Text(
-                                                    "Shu adresni ochirib tashlamoqchimisiz?",
-                                                  ),
-                                                  titleTextStyle: AppTextStyle
-                                                      .interBold
-                                                      .copyWith(
-                                                    color: AppColors.black,
-                                                    fontSize: 20.sp,
-                                                  ),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      onPressed: () async {
-                                                        if (!context.mounted) {
-                                                          return;
-                                                        }
-                                                        context
-                                                            .read<
-                                                                AddressesViewModel>()
-                                                            .deleteCategory(
-                                                              myAddress.docId,
-                                                            );
-                                                        context
-                                                            .read<
-                                                                AddressesViewModel>()
-                                                            .getPlaces();
-                                                        Navigator.pop(context);
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(
-                                                          SnackBar(
-                                                            content: Text(
-                                                              "DELETED",
-                                                              style:
-                                                                  AppTextStyle
-                                                                      .interBold
-                                                                      .copyWith(
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                      child: Text(
-                                                        'Yes',
-                                                        style: AppTextStyle
-                                                            .interBold
-                                                            .copyWith(
-                                                          color:
-                                                              AppColors.black,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: Text(
-                                                        'No',
-                                                        style: AppTextStyle
-                                                            .interBold
-                                                            .copyWith(
-                                                          color:
-                                                              AppColors.black,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                );
-                                              });
+
+                                          context
+                                              .read<
+                                              AddressesViewModel>()
+                                              .deleteCategory(
+                                            myAddress.docId,
+                                          );
+                                          context
+                                              .read<
+                                              AddressesViewModel>()
+                                              .getPlaces();
                                         },
                                         child: Icon(
                                           Icons.cancel_outlined,
