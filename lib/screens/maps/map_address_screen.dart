@@ -30,7 +30,7 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
   Widget build(BuildContext context) {
     CameraPosition? cameraPosition;
     return AnnotatedRegion(
-      value: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+      value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
       child: Scaffold(
         body: Consumer<MapsViewModel>(
           builder: (context, viewModel, child) {
