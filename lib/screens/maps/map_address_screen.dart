@@ -90,7 +90,7 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                             color: context.watch<MapsViewModel>().mapType ==
                                 MapType.normal
                                 ? Colors.black
-                                : Colors.white,
+                                : Colors.grey,
                           ),
                         ),
                       ),
