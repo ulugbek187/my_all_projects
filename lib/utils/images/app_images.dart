@@ -1,9 +1,10 @@
 class AppImages {
   //.png
-  static const String pc = "assets/images/pc.png";
+  static const String nt = "assets/images/nt.png";
+  static const String profile = "assets/images/profile.png";
 
   //.svg
-  static const String arrowBack = "assets/icons/arrow_back.svg";
+  static const String delete = "assets/icons/delete.svg";
 
   //.jpg
 

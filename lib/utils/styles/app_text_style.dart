@@ -1,52 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_all_projects/utils/colors/app_colors.dart';
+
+import '../colors/app_colors.dart';
 
 class AppTextStyle {
   //Inter
-  static TextStyle interThin = TextStyle(
+  static TextStyle interThin = const TextStyle(
     fontFamily: "Inter",
     fontWeight: FontWeight.w200,
-    fontSize: 14.sp,
-    color: AppColors.black,
+    fontSize: 14,
+    color: AppColors.c_2A3256,
   );
-  static TextStyle interLight = TextStyle(
+  static TextStyle interLight = const TextStyle(
     fontFamily: "Inter",
     fontWeight: FontWeight.w300,
-    fontSize: 14.sp,
-    color: AppColors.black,
+    fontSize: 14,
+    color: AppColors.c_2A3256,
   );
-  static TextStyle interRegular = TextStyle(
+  static TextStyle interRegular = const TextStyle(
     fontFamily: "Inter",
     fontWeight: FontWeight.w400,
-    fontSize: 16.sp,
-    color: AppColors.black,
+    fontSize: 16,
+    color: AppColors.c_2A3256,
   );
-  static TextStyle interMedium = TextStyle(
+  static TextStyle interMedium = const TextStyle(
     fontFamily: "Inter",
     fontWeight: FontWeight.w500,
-    fontSize: 16.sp,
-    color: AppColors.black,
+    fontSize: 16,
+    color: AppColors.c_2A3256,
   );
 
-  static TextStyle interSemiBold = TextStyle(
+  static TextStyle interSemiBold = const TextStyle(
     fontFamily: "Inter",
     fontWeight: FontWeight.w600,
-    fontSize: 16.sp,
-    color: AppColors.black,
+    fontSize: 16,
+    color: AppColors.c_2A3256,
   );
 
-  static TextStyle interBold = TextStyle(
+  static TextStyle interBold = const TextStyle(
     fontFamily: "Inter",
     fontWeight: FontWeight.w700,
-    fontSize: 16.sp,
-    color: AppColors.black,
+    fontSize: 16,
+    color: AppColors.c_2A3256,
   );
 
-  static TextStyle interBlack = TextStyle(
+  static TextStyle interBlack = const TextStyle(
     fontFamily: "Inter",
     fontWeight: FontWeight.w800,
-    fontSize: 16.sp,
-    color: AppColors.black,
+    fontSize: 16,
+    color: AppColors.c_2A3256,
   );
 }
