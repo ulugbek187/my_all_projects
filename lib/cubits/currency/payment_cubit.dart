@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_all_projects/cubits/currency/payment_state.dart';
-import 'package:my_all_projects/data/models/trans_actions_model.dart';
+import 'package:my_all_projects/data/models/payment_model.dart';
 import '../../data/models/network_response.dart';
 import '../../data/repositories/currency_repository.dart';
 

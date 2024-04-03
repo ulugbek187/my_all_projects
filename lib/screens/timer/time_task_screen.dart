@@ -95,10 +95,8 @@ class _TimeTaskScreenState extends State<TimeTaskScreen> {
                             );
                             setState(() {});
                           },
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              color: Colors.green
-                            ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(120),
                             child: Image.asset(
                               AppImages.clock,
                               width: 200,
