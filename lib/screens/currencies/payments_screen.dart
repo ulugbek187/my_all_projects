@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_all_projects/cubits/currency/payment_cubit.dart';
+import 'package:my_all_projects/cubits/currency/payment_state.dart';
+import 'package:my_all_projects/data/models/payment_model.dart';
 import 'package:my_all_projects/utils/styles/app_text_style.dart';
-import '../../cubits/currency/trans_actions_cubit.dart';
-import '../../cubits/currency/trans_actions_state.dart';
-import '../../data/models/trans_actions_model.dart';
 
 class PaymentsScreen extends StatelessWidget {
   const PaymentsScreen({super.key});
@@ -39,24 +39,24 @@ class PaymentsScreen extends StatelessWidget {
               ),
             ),
           ),
-          body: BlocBuilder<TransActionsCubit, TransActionsState>(
+          body: BlocBuilder<PaymentCubit, PaymentState>(
             builder: (context, state) {
-              if (state is TransActionsLoadingState) {
+              if (state is PaymentLoadingState) {
                 return const Center(child: CircularProgressIndicator());
               }
-              if (state is TransActionsErrorState) {
+              if (state is PaymentErrorState) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(state.errorText),
                   ],
                 );
-              } else if (state is TransActionsSuccessState) {
+              } else if (state is PaymentSuccessState) {
                 return ListView(
                   physics: const BouncingScrollPhysics(),
-                  children: List.generate(state.transActions.length, (index) {
-                    TransactionsModel transactionsModel =
-                        state.transActions[index];
+                  children: List.generate(state.payment.length, (index) {
+                    PaymentModel transactionsModel =
+                        state.payment[index];
                     return Column(
                       children: [
                         Padding(

@@ -2,8 +2,8 @@ import 'time_state_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class TimeTaskCubit extends Cubit<TimeTaskState> {
-  TimeTaskCubit() : super(TimeTaskState.initialValue());
+class TimeCubit extends Cubit<TimeState> {
+  TimeCubit() : super(TimeState.initialValue());
 
   void addHourMinute({
     required int hour,
@@ -60,6 +60,6 @@ class TimeTaskCubit extends Cubit<TimeTaskState> {
   }
 
   void finishTaskTime() {
-    emit(TimeTaskState.initialValue());
+    emit(TimeState.initialValue());
   }
 }

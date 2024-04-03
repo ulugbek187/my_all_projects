@@ -1,14 +1,14 @@
-class TransactionsModel {
+class PaymentModel {
   final String transferDate;
   final List<Data> data;
 
-  TransactionsModel({
+  PaymentModel({
     required this.transferDate,
     required this.data,
   });
 
-  factory TransactionsModel.fromJson(Map<String, dynamic> json) {
-    return TransactionsModel(
+  factory PaymentModel.fromJson(Map<String, dynamic> json) {
+    return PaymentModel(
       transferDate: json['transfer_date'],
       data: List<Data>.from(json['data'].map((x) => Data.fromJson(x))),
     );

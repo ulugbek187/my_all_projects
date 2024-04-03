@@ -1,4 +1,4 @@
-class TimeTaskState {
+class TimeState {
   final String taskName;
   final int hour;
   final int minute;
@@ -8,7 +8,7 @@ class TimeTaskState {
   final int targetMinute;
   final bool finishTime;
 
-  TimeTaskState({
+  TimeState({
     required this.taskName,
     required this.hour,
     required this.progressValue,
@@ -19,7 +19,8 @@ class TimeTaskState {
     required this.finishTime,
   });
 
-  TimeTaskState copyWith({
+  TimeState copyWith(
+      {
     String? taskName,
     int? hour,
     int? minute,
@@ -28,8 +29,9 @@ class TimeTaskState {
     double? progressValue,
     int? targetMinute,
     bool? finishTime,
-  }) =>
-      TimeTaskState(
+  }
+  ) =>
+      TimeState(
         taskName: taskName ?? this.taskName,
         hour: hour ?? this.hour,
         minute: minute ?? this.minute,
@@ -40,7 +42,7 @@ class TimeTaskState {
         progressValue: progressValue ?? this.progressValue,
       );
 
-  static TimeTaskState initialValue() => TimeTaskState(
+  static TimeState initialValue() => TimeState(
       progressValue: 0.0,
       taskName: '',
       hour: 0,

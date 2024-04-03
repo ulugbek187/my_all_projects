@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_all_projects/screens/timer/time_screen.dart';
+import 'package:my_all_projects/utils/images/app_images.dart';
 import 'package:my_all_projects/utils/styles/app_text_style.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../cubits/timer/time_task_cubit.dart';
 
 class TimeTaskScreen extends StatefulWidget {
@@ -77,8 +79,8 @@ class _TimeTaskScreenState extends State<TimeTaskScreen> {
                         const SizedBox(
                           height: 50,
                         ),
-                        IconButton(
-                          onPressed: () async {
+                        ZoomTapAnimation(
+                          onTap: () async {
                             timeOfDay = await showTimePicker(
                               context: context,
                               initialEntryMode: TimePickerEntryMode.input,
@@ -93,11 +95,17 @@ class _TimeTaskScreenState extends State<TimeTaskScreen> {
                             );
                             setState(() {});
                           },
-                          icon: const Icon(
-                            Icons.timelapse,
-                            size: 200,
-                            color: Colors.black,
-                          ),
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              color: Colors.green
+                            ),
+                            child: Image.asset(
+                              AppImages.clock,
+                              width: 200,
+                              height: 200,
+                              fit: BoxFit.contain,
+                            ),
+                          )
                         ),
                         Text(
                           timeOfDay.toString(),
@@ -145,14 +153,14 @@ class _TimeTaskScreenState extends State<TimeTaskScreen> {
                       if (_formKey.currentState!.validate() &&
                           timeOfDay != null) {
                         if (!context.mounted) return;
-                        context.read<TimeTaskCubit>().addHourMinute(
+                        context.read<TimeCubit>().addHourMinute(
                             hour: timeOfDay!.hour,
                             minute: timeOfDay!.minute,
                             taskName: _taskController.text);
                         debugPrint(
-                            "---------------------------hour: ${context.read<TimeTaskCubit>().state.hour}");
+                            "---------------------------hour: ${context.read<TimeCubit>().state.hour}");
                         debugPrint(
-                            "---------------------------minute: ${context.read<TimeTaskCubit>().state.minute}");
+                            "---------------------------minute: ${context.read<TimeCubit>().state.minute}");
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(

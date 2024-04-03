@@ -16,7 +16,7 @@ class _StartTaskScreenState extends State<StartTaskScreen> {
   @override
   void initState() {
     Future.microtask(() {
-      context.read<TimeTaskCubit>().startTime();
+      context.read<TimeCubit>().startTime();
     });
     super.initState();
   }
@@ -57,8 +57,8 @@ class _StartTaskScreenState extends State<StartTaskScreen> {
           color: Colors.black, fontWeight: FontWeight.w500, fontSize: 32,
         ),),
       ),
-      body: BlocBuilder<TimeTaskCubit, TimeTaskState>(
-        builder: (BuildContext context, TimeTaskState state) {
+      body: BlocBuilder<TimeCubit, TimeState>(
+        builder: (BuildContext context, TimeState state) {
           return SizedBox(
             width: double.infinity,
             child: Column(
@@ -153,7 +153,7 @@ class _StartTaskScreenState extends State<StartTaskScreen> {
                           setState(() {
                             isCancel = true;
                           });
-                          context.read<TimeTaskCubit>().finishTaskTime();
+                          context.read<TimeCubit>().finishTaskTime();
                           isCancel ? ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               backgroundColor: Colors.green,
