@@ -41,7 +41,7 @@ class ApiProvider extends ApiClient {
       },
     );
 //AAAAotu5XVc:APA91bE_R7BXT7D5eo38OKdb1cIsKc2ypeSshau8DFngw1lfpKL_RuDr-H2xzshkDvB5548DoCflrzkDqGkvXsYDD2Nw-Bcc-xKOsdBniqu1MSaQ6Qkm2J-bOHgMGTEA49n0VTlprhL3
-    // YNowF0Y1mviHen9rwr8-T-JpwDbRrHKDqVYtfCcSziIsQCURWQ
+    //
     try {
       Response response = await dio.post(
         "/fcm/send",
