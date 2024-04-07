@@ -1,28 +1,77 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:my_all_projects/data/models/payment_model.dart';
-import '../../data/models/network_response.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:my_all_projects/data/api_client.dart';
+import 'package:my_all_projects/data/models/currency_model.dart';
+import 'package:my_all_projects/utils/constants/app_constants.dart';
 
-class ApiProvider {
-  static Future<NetworkResponse> fetchTransactions() async {
-    const apiUrl = "https://banking-api.free.mockoapp.net/transactions-incomes";
+class ApiProvider extends ApiClient {
+  Future<List<CurrencyModel>> getCurrencies() async {
+    List<CurrencyModel> currencies = [];
+
     try {
-      final response = await http.get(Uri.parse(apiUrl));
+      Response response = await dio.get(AppConstants.currenciesEndPoint);
       if (response.statusCode == 200) {
-        List<dynamic> jsonResponse = json.decode(response.body);
-        List<PaymentModel> transactions = jsonResponse
-            .map(
-              (data) => PaymentModel.fromJson(
-                data,
-              ),
-            )
-            .toList();
-        return NetworkResponse(data: transactions);
-      } else {
-        return NetworkResponse(errorText: "NO'MALUM XATOLIK");
+        currencies = (response.data as List?)
+                ?.map((e) => CurrencyModel.fromJson(e))
+                .toList() ??
+            [];
+        return currencies;
       }
-    } catch (e) {
-      return NetworkResponse(errorText: 'Error: $e');
+    } catch (error) {
+      debugPrint("ERROR:$error");
     }
+    return currencies;
+  }
+
+  static Future<String> sendNotificationToUsers({
+    String? topicName,
+    String? fcmToken,
+    required String title,
+    required String body,
+  }) async {
+    Dio dio = Dio();
+
+    Options options = Options(
+      sendTimeout: const Duration(seconds: 15),
+      receiveTimeout: const Duration(seconds: 30),
+      responseType: ResponseType.json,
+      headers: {
+        "Authorization": "key=YNowF0Y1mviHen9rwr8-T-JpwDbRrHKDqVYtfCcSziIsQCURWQ",
+        "Content-Type": "application/json",
+      },
+    );
+//AAAAotu5XVc:APA91bE_R7BXT7D5eo38OKdb1cIsKc2ypeSshau8DFngw1lfpKL_RuDr-H2xzshkDvB5548DoCflrzkDqGkvXsYDD2Nw-Bcc-xKOsdBniqu1MSaQ6Qkm2J-bOHgMGTEA49n0VTlprhL3
+    // YNowF0Y1mviHen9rwr8-T-JpwDbRrHKDqVYtfCcSziIsQCURWQ
+    try {
+      Response response = await dio.post(
+        "/fcm/send",
+        options: options,
+        onReceiveProgress: (current, total) {},
+        queryParameters: {},
+        data: {
+          "to": topicName != null ? "/topics/$topicName" : fcmToken,
+          "notification": {
+            "title": title,
+            "body": body,
+            "sound": "default",
+            "priority": "high"
+          },
+          "data": {
+            "news_image":
+                "https://top.uz/upload/iblock/0de/0dec725e4583a0698a8732ca646a4994.png",
+            "news_title": "Test",
+            "news_text":
+                "Finland's national carrier Finnair has started weighing passengers on its flights from the capital city of Helsinki. The weigh-ins are being done on a voluntary basis and are completely anonymous. A company spokesperson said the new initiative is to ensure safety standards on flights are adhered to. He said any airplane should not exceed the prescribed maximum weight for safe take-offs and landings."
+          }
+        },
+      );
+
+      if (response.statusCode == 200) {
+        return response.data;
+      }
+    } catch (error) {
+      debugPrint("FAILED TO SEND NOTIFICATION");
+    }
+    return "UNKNOWN ERROR";
   }
 }

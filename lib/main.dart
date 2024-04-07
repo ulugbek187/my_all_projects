@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'app/app.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_all_projects/blocs/currencies_bloc.dart';
+import 'package:my_all_projects/blocs/currencies_event.dart';
+import 'package:my_all_projects/data/api_provider.dart';
+import 'package:my_all_projects/data/currencies_repo.dart';
+import 'package:my_all_projects/screens/currencies_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -8,8 +13,44 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  runApp(App());
+}
 
-  runApp(
-    const App(),
-  );
+class App extends StatelessWidget {
+  App({super.key});
+
+  ApiProvider apiProvider = ApiProvider();
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(
+            create: (_) => CurrenciesRepo(apiProvider: apiProvider)),
+      ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) =>
+                CurrenciesBloc(currenciesRepo: context.read<CurrenciesRepo>())
+                  ..add(GetCurrenciesEvent()),
+          )
+        ],
+        child: const MyApp(),
+      ),
+    );
+  }
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(useMaterial3: false),
+      home: const CurrenciesScreen(),
+    );
+  }
 }
