@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:my_all_projects/utils/constants/app_constants.dart';
+import '../../utils/app_constants/app_constants.dart';
 
 class ApiClient {
   ApiClient() {
@@ -14,30 +14,30 @@ class ApiClient {
 
     dio.options = BaseOptions(
       queryParameters: {},
-      baseUrl: AppConstants.currenciesBaseUrl,
+      baseUrl: AppConstants.baseUrl,
       receiveTimeout: const Duration(seconds: 5),
-      // headers: {
-      //   "Authorization": "Bearer erjfjrbjrfbh",
-      //   "Content-Type": "application/Json"
-      // },
+      headers: {
+        "Authorization": "Bearer ${AppConstants.apiKey}",
+        "Content-Type": "application/Json"
+      },
     );
 
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
-          debugPrint("REQUEST ga KIRDI:${options.uri}");
+          debugPrint("ENTER ON REQUEST:${options.uri}");
           return handler.next(options);
         },
         onResponse:
             (Response<dynamic> response, ResponseInterceptorHandler handler) {
-          debugPrint("RESPONSE ga KIRDI:${response.data}");
+          debugPrint("ENTER ON RESPONSE:${response.data}");
           return handler.next(response);
         },
         onError: (
           DioException error,
           ErrorInterceptorHandler handler,
         ) {
-          debugPrint("ERROR ga KIRDI:${error.message}");
+          debugPrint("ENTER ON ERROR:${error.message}");
           return handler.next(error);
         },
       ),

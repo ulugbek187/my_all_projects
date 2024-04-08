@@ -1,39 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_all_projects/blocs/currencies_bloc.dart';
-import 'package:my_all_projects/blocs/currencies_event.dart';
-import 'package:my_all_projects/data/api_provider.dart';
-import 'package:my_all_projects/data/currencies_repo.dart';
-import 'package:my_all_projects/screens/currencies_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_all_projects/blocs/books_bloc.dart';
+import 'package:my_all_projects/blocs/books_event.dart';
+import 'package:my_all_projects/data/repositories/books_repository.dart';
+import 'package:my_all_projects/screens/global_screen/global_screen.dart';
+import 'package:my_all_projects/utils/colors/app_colors.dart';
+import 'data/api_provider/api_provider.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
-  runApp(App());
+void main() {
+  runApp(
+    const App(),
+  );
 }
 
 class App extends StatelessWidget {
-  App({super.key});
-
-  ApiProvider apiProvider = ApiProvider();
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ApiProvider apiProvider = ApiProvider();
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-            create: (_) => CurrenciesRepo(apiProvider: apiProvider)),
+          create: (_) => BooksRepository(
+            apiProvider: apiProvider,
+          ),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) =>
-                CurrenciesBloc(currenciesRepo: context.read<CurrenciesRepo>())
-                  ..add(GetCurrenciesEvent()),
+            create: (context) => BooksBloc(
+              booksRepository: context.read<BooksRepository>(),
+            )..add(
+                GetBooksEvent(),
+              ),
           )
         ],
         child: const MyApp(),
@@ -43,14 +45,32 @@ class App extends StatelessWidget {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+  });
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: false),
-      home: const CurrenciesScreen(),
-    );
-  }
+  Widget build(
+    BuildContext context,
+  ) =>
+      ScreenUtilInit(
+        designSize: const Size(
+          375,
+          812,
+        ),
+        builder: (context, child) {
+          ScreenUtil.init(
+            context,
+          );
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              useMaterial3: false,
+              scaffoldBackgroundColor: AppColors.white,
+            ),
+            home: child,
+          );
+        },
+        child: const GlobalScreen(),
+      );
 }
