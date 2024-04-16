@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_all_projects/data/api_client/api_client.dart';
 import 'package:my_all_projects/screens/global_screen/countries_screen.dart';
 import 'blocs/countries_bloc.dart';
-import 'data/api/api_client.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

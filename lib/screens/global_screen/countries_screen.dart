@@ -32,33 +32,31 @@ class _CountriesScreenState extends State<CountriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.black,
-      appBar: AppBar(
         backgroundColor: AppColors.black,
-        title: Text(
-          "$title Countries",
-          style: AppTextStyle.interBold,
-        ),
-        elevation: 0,
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: 10.h,
-              horizontal: 20.w,
-            ),
-            child: MyTextField(
-              onChanged: (String value) {
-                searchText = value;
-                textEditingController.text = value;
-                setState(
-                  () {},
-                );
-              },
-              controller: textEditingController,
-            ),
+        appBar: AppBar(
+          backgroundColor: AppColors.black,
+          title: Text(
+            "$title Countries",
+            style: AppTextStyle.interBold,
           ),
+          elevation: 0,
+        ),
+        body: Column(children: [
+          Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 10.h,
+                horizontal: 20.w,
+              ),
+              child: MyTextField(
+                onChanged: (String value) {
+                  searchText = value;
+                  textEditingController.text = value;
+                  setState(
+                    () {},
+                  );
+                },
+                controller: textEditingController,
+              )),
           SingleChildScrollView(
             padding: EdgeInsets.symmetric(
               vertical: 5.h,
@@ -66,99 +64,85 @@ class _CountriesScreenState extends State<CountriesScreen> {
             ),
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
-            child:Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.min,
               children: [
                 ...List.generate(
-                  continents.length,
-                      (index) => Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 5.w,
-                    ),
-                    child: Ink(
-                      height: 50.h,
-                      width: 120.w,
-                      decoration: BoxDecoration(
-                        color:
-                        activeIndex == index ? Colors.green : Colors.black,
-                        borderRadius: BorderRadius.circular(
-                          16.r,
+                    continents.length,
+                    (index) => Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 5.w,
                         ),
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          context.read<CountriesBloc>().add(
-                            FetchCountriesEvent(
-                              continentCodes[index],
+                        child: Ink(
+                            height: 50.h,
+                            width: 120.w,
+                            decoration: BoxDecoration(
+                              color: activeIndex == index
+                                  ? Colors.green
+                                  : Colors.black,
+                              borderRadius: BorderRadius.circular(
+                                16.r,
+                              ),
                             ),
-                          );
-                          setState(() {
-                            title = continents[index];
-                            activeIndex = index;
-                          });
-                        },
-                        borderRadius: BorderRadius.circular(
-                          16.r,
-                        ),
-                        child: Center(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 10.w,
-                            ),
-                            child: Text(
-                              continents[index],
-                              textAlign: TextAlign.center,
-                              style: AppTextStyle.interBold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
+                            child: InkWell(
+                                onTap: () {
+                                  context.read<CountriesBloc>().add(
+                                        FetchCountriesEvent(
+                                          continentCodes[index],
+                                        ),
+                                      );
+                                  setState(() {
+                                    title = continents[index];
+                                    activeIndex = index;
+                                  });
+                                },
+                                borderRadius: BorderRadius.circular(
+                                  16.r,
+                                ),
+                                child: Center(
+                                    child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 10.w,
+                                        ),
+                                        child: Text(
+                                          continents[index],
+                                          textAlign: TextAlign.center,
+                                          style: AppTextStyle.interBold,
+                                        ))))))),
               ],
             ),
           ),
-          Expanded(
-            child: BlocBuilder<CountriesBloc, CountriesState>(
-              builder: (context, state) {
-                if (state is CountriesLoadingState) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (state is CountriesErrorState) {
-                  return Center(child: Text(state.errorMessage));
-                }
+          Expanded(child: BlocBuilder<CountriesBloc, CountriesState>(
+            builder: (context, state) {
+              if (state is CountriesLoadingState) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (state is CountriesErrorState) {
+                return Center(child: Text(state.errorMessage));
+              }
 
-                if (state is CountriesSuccessState) {
-                  return ListView(
+              if (state is CountriesSuccessState) {
+                return ListView(
                     physics: const BouncingScrollPhysics(),
-                    padding: EdgeInsets.symmetric(
-                      vertical: 10.h,
-                    ),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 10.h, horizontal: 5.w),
                     children: [
-                      ...List.generate(
-                        state.countries.length,
-                        (index) {
-                          final country = state.countries[index];
-                          if (country.name
-                              .toLowerCase()
-                              .contains(searchText.toLowerCase())) {
-                            return MyContainer(countryModel: country);
-                          } else {
-                            return const SizedBox.shrink();
-                          }
-                        },
-                      ),
-                    ],
-                  );
-                }
-                return const SizedBox();
-              },
-            ),
-          ),
-        ],
-      ),
-    );
+                      ...List.generate(state.countries.length, (index) {
+                        final country = state.countries[index];
+                        if (country.name
+                            .toLowerCase()
+                            .contains(searchText.toLowerCase())) {
+                          return MyContainer(countryModel: country);
+                        } else {
+                          return const SizedBox.shrink();
+                        }
+                      })
+                    ]);
+              }
+              return const SizedBox();
+            },
+          ))
+        ]));
   }
 }

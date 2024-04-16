@@ -1,14 +1,12 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../data/api/api_client.dart';
-import '../data/models/country_model.dart';
-import '../data/models/network_response.dart';
-
+import 'package:my_all_projects/data/api_client/api_client.dart';
+import 'package:my_all_projects/data/models/country_model.dart';
+import 'package:my_all_projects/data/models/network_response.dart';
 part 'countries_event.dart';
-
 part 'countries_state.dart';
 
-class CountriesBloc extends Bloc<CountriesEvent, CountriesState> {
+class CountriesBloc extends Bloc<CountriesEvent, CountriesState>  {
   CountriesBloc({required this.apiClient}) : super(CountriesInitialState()) {
     on<FetchCountriesEvent>(_fetchCountries);
   }
@@ -19,7 +17,7 @@ class CountriesBloc extends Bloc<CountriesEvent, CountriesState> {
     emit(CountriesLoadingState());
 
     NetworkResponse networkResponse = event.continentName == 'ALL'
-        ? await apiClient.getCountries()
+        ? await apiClient.getAllCountries()
         : await apiClient.getCountriesByContinents(
             event.continentName,
           );

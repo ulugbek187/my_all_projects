@@ -20,7 +20,7 @@ class ApiClient {
 
   final GraphQLClient graphQLClient;
 
-  Future<NetworkResponse> getCountries() async {
+  Future<NetworkResponse> getAllCountries() async {
     try {
       var result = await graphQLClient.query(
         QueryOptions(document: gql(countriesQuery)),
