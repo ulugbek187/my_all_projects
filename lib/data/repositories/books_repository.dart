@@ -6,5 +6,5 @@ class BooksRepository {
 
   final ApiProvider apiProvider;
 
-  Future<MyResponse> getBooks() => apiProvider.getBooks();
+  Future<MyResponse> getProduct() => apiProvider.getProducts();
 }

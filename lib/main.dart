@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_all_projects/blocs/books_bloc.dart';
-import 'package:my_all_projects/blocs/books_event.dart';
+import 'package:my_all_projects/blocs/product_bloc.dart';
+import 'package:my_all_projects/blocs/product_event.dart';
 import 'package:my_all_projects/data/repositories/books_repository.dart';
 import 'package:my_all_projects/screens/global_screen/global_screen.dart';
 import 'package:my_all_projects/utils/colors/app_colors.dart';
@@ -31,10 +31,10 @@ class App extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => BooksBloc(
+            create: (context) => ProductBloc(
               booksRepository: context.read<BooksRepository>(),
             )..add(
-                GetBooksEvent(),
+                GetProductEvent(),
               ),
           )
         ],

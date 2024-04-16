@@ -7,7 +7,7 @@ import '../../utils/app_constants/app_constants.dart';
 import '../response/my_response.dart';
 
 class ApiProvider extends ApiClient {
-  Future<MyResponse> getBooks() async {
+  Future<MyResponse> getProducts() async {
     List<ProductModel> books = [];
 
     try {
@@ -36,7 +36,7 @@ class ApiProvider extends ApiClient {
     );
   }
 
-  static Future<MyResponse> addStaticBook(ProductModel bookModel) async {
+  static Future<MyResponse> addStaticProducts(ProductModel bookModel) async {
     Dio dio = Dio();
     Options options = Options(
       sendTimeout: const Duration(seconds: 15),
@@ -70,7 +70,7 @@ class ApiProvider extends ApiClient {
     }
   }
 
-  static Future<MyResponse> deleteStaticBook(String uuid) async {
+  static Future<MyResponse> deleteStaticProducts(String uuid) async {
     Dio dio = Dio();
     Options options = Options(
       sendTimeout: const Duration(seconds: 15),
@@ -101,7 +101,7 @@ class ApiProvider extends ApiClient {
     }
   }
 
-  Future<MyResponse> addNewBook(ProductModel bookModel) async {
+  Future<MyResponse> addNewProducts(ProductModel bookModel) async {
     try {
       Response response = await dio.post(
         AppConstants.base,

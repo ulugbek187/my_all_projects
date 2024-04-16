@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_all_projects/blocs/books_bloc.dart';
-import 'package:my_all_projects/blocs/books_event.dart';
-import 'package:my_all_projects/blocs/books_state.dart';
+import 'package:my_all_projects/blocs/product_bloc.dart';
+import 'package:my_all_projects/blocs/product_event.dart';
+import 'package:my_all_projects/blocs/product_state.dart';
 import 'package:my_all_projects/data/api_provider/api_provider.dart';
 import 'package:my_all_projects/data/models/products/products_model.dart';
-import 'package:my_all_projects/screens/global_screen/widgets/book_item.dart';
+import 'package:my_all_projects/screens/global_screen/widgets/product_item.dart';
 import 'package:my_all_projects/utils/colors/app_colors.dart';
 import 'package:my_all_projects/utils/styles/app_text_style.dart';
 
@@ -36,10 +36,10 @@ class _GlobalScreenState extends State<GlobalScreen> {
                 price: '250000',
                 rate: '5.0',
               );
-              await ApiProvider.addStaticBook(bookModel);
+              await ApiProvider.addStaticProducts(bookModel);
               if (context.mounted) {
-                context.read<BooksBloc>().add(
-                      GetBooksEvent(),
+                context.read<ProductBloc>().add(
+                      GetProductEvent(),
                     );
               }
             },
@@ -58,20 +58,20 @@ class _GlobalScreenState extends State<GlobalScreen> {
               style: AppTextStyle.interBold,
             ),
           ),
-          body: BlocConsumer<BooksBloc, BooksState>(
+          body: BlocConsumer<ProductBloc, ProductState>(
               builder: (context, state) {
-                if (state is BooksLoadingState) {
+                if (state is ProductLoadingState) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
-                if (state is BooksErrorState) {
+                if (state is ProductErrorState) {
                   return Center(
                     child: Text(state.errorText),
                   );
                 }
 
-                if (state is BooksSuccessState) {
+                if (state is ProductSuccessState) {
                   return RefreshIndicator(
                     onRefresh: () {
                       return Future<void>.delayed(
@@ -79,49 +79,52 @@ class _GlobalScreenState extends State<GlobalScreen> {
                           seconds: 2,
                         ),
                         () {
-                          context.read<BooksBloc>().add(
-                                GetBooksEvent(),
+                          context.read<ProductBloc>().add(
+                                GetProductEvent(),
                               );
                         },
                       );
                     },
-                    child: GridView.count(
-                      physics: const BouncingScrollPhysics(),
-                      primary: false,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20.w,
-                        vertical: 20.h,
-                      ),
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.45,
-                      children: List.generate(
-                        state.product.length,
-                        (index) {
-                          ProductModel book = state.product[index];
-                          return ProductsItem(
-                            onLongTap: () async {
-                              await ApiProvider.deleteStaticBook(
-                                book.uuid!,
-                              );
-                              if (context.mounted) {
-                                context.read<BooksBloc>().add(
-                                      GetBooksEvent(),
+                    child: ListView(
+                      children: [
+                        Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 100.w, vertical: 5.h),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 5 .h),
+                            child: Column(
+                              children: [
+                                ...List.generate(
+                                  state.product.length,
+                                      (index) {
+                                    ProductModel book = state.product[index];
+                                    return ProductsItem(
+                                      onLongTap: () async {
+                                        await ApiProvider.deleteStaticProducts(
+                                          book.uuid!,
+                                        );
+                                        if (context.mounted) {
+                                          context.read<ProductBloc>().add(
+                                            GetProductEvent(),
+                                          );
+                                        }
+                                      },
+                                      linkPicture: book.imageUrl,
+                                      bookName: book.productName,
+                                      author: book.author,
+                                      categoryName: book.categoryName,
+                                      rate: book.rate,
+                                      price: book.price,
+                                      onTap: () {},
                                     );
-                              }
-                            },
-                            linkPicture: book.imageUrl,
-                            bookName: book.productName,
-                            author: book.author,
-                            categoryName: book.categoryName,
-                            rate: book.rate,
-                            price: book.price,
-                            onTap: () {},
-                          );
-                        },
-                      ),
-                    ),
+                                  },
+                                ),
+                                SizedBox(height: 10.h,),
+                              ]
+                            ),
+                          ),
+                        )
+                      ],
+                    )
                   );
                 }
                 return const Center(child: Text("INITIAL"));
@@ -130,3 +133,30 @@ class _GlobalScreenState extends State<GlobalScreen> {
     );
   }
 }
+
+
+//List.generate(
+//                         state.product.length,
+//                         (index) {
+//                           ProductModel book = state.product[index];
+//                           return ProductsItem(
+//                             onLongTap: () async {
+//                               await ApiProvider.deleteStaticBook(
+//                                 book.uuid!,
+//                               );
+//                               if (context.mounted) {
+//                                 context.read<BooksBloc>().add(
+//                                       GetBooksEvent(),
+//                                     );
+//                               }
+//                             },
+//                             linkPicture: book.imageUrl,
+//                             bookName: book.productName,
+//                             author: book.author,
+//                             categoryName: book.categoryName,
+//                             rate: book.rate,
+//                             price: book.price,
+//                             onTap: () {},
+//                           );
+//                         },
+//                       ),
