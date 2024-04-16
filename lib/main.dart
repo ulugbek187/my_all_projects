@@ -19,7 +19,7 @@ Future<void> main() async {
             'ALL',
           ),
         ),
-    )
+    ),
   ], child: const App()));
 }
 
