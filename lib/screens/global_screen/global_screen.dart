@@ -85,7 +85,7 @@ class GlobalScreen extends StatelessWidget {
                                           controller.addQuiz(letter),
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.blue,
-                                        padding: EdgeInsets.symmetric(
+                                        padding: const EdgeInsets.symmetric(
                                           horizontal: 12,
                                           vertical: 8,
                                         ),
@@ -114,11 +114,18 @@ class GlobalScreen extends StatelessWidget {
                           const SizedBox(
                             height: 20,
                           ),
-                          Text(
-                            controller.errorMessage.value,
-                            style: const TextStyle(
-                              color: Colors.red,
-                              fontSize: 18,
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              controller.errorMessage.value,
+                              style: const TextStyle(
+                                color: Colors.red,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
                         ],
