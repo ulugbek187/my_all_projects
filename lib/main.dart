@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_all_projects/screens/global_screen/global_screen.dart';
+import 'package:my_all_projects/screens/splash_screen/splash_screen.dart';
 import 'package:my_all_projects/utils/colors/app_colors.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       builder: (context, child) {
         ScreenUtil.init(context);
-        return MaterialApp(
+        return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             useMaterial3: false,
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const GlobalScreen(),
+      child: const MyProekt(),
     );
   }
 }

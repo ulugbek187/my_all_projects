@@ -1,0 +1,68 @@
+{
+  "data": [
+    {
+      "questions": [
+        {
+          "question_text": "Каго из птиц называют саниаром леса?",
+          "true_answer": "Дятел",
+          "variant1": "Дятел",
+          "variant2": "Сова"
+        },
+        {
+          "question_text": "Какая страна самая большая?",
+          "true_answer": "Россия",
+          "variant1": "Америка",
+          "variant2": "Россия"
+        },
+        {
+          "question_text": "Кого называют <<<Царь зверей>>>?",
+          "true_answer": "Льва",
+          "variant1": "Льва",
+          "variant2": "Тигра"
+        },
+        {
+          "question_text": "Сколько лапок у паука?",
+          "true_answer": "8",
+          "variant1": "8",
+          "variant2": "10"
+        },
+        {
+          "question_text": "Где правили Фараоны?",
+          "true_answer": "Египет",
+          "variant1": "Индия",
+          "variant2": "Египет"
+        },
+        {
+          "question_text": "За какой нотой идет <ми>?",
+          "true_answer": "ре",
+          "variant1": "ре",
+          "variant2": "фа"
+        },
+        {
+          "question_text": "Сколько цветов во флаге Узбекистан?",
+          "true_answer": "5",
+          "variant1": "4",
+          "variant2": "5"
+        },
+        {
+          "question_text": "Как называют замершую воду?",
+          "true_answer": "Лед",
+          "variant1": "Лед",
+          "variant2": "Снег"
+        },
+        {
+          "question_text": "Сколько цветов в радуге?",
+          "true_answer": "7",
+          "variant1": "7",
+          "variant2": "9"
+        },
+        {
+          "question_text": "Из чего идет Дождь?",
+          "true_answer": "Тучи",
+          "variant1": "Облока",
+          "variant2": "Тучи"
+        }
+      ]
+    }
+  ]
+}
