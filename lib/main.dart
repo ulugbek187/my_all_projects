@@ -1,34 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_all_projects/screens/global_screen/global_screen.dart';
-import 'package:my_all_projects/utils/colors/app_colors.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(
-        428,
-        926,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Головоломка 4x4',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
-      builder: (context, child) {
-        ScreenUtil.init(context);
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            useMaterial3: false,
-            scaffoldBackgroundColor: AppColors.white,
-          ),
-          home: child,
-        );
-      },
-      child: const GlobalScreen(),
+      home: const MyHomePage(title: 'Головоломка 4x4'),
     );
   }
 }
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => MyHomePageState();
+}
+
