@@ -28,6 +28,14 @@ List<GameModel> questions = [
       "https://cdn.britannica.com/12/231212-131-A5C0843D/Boy-drinking-milk.jpg",
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmXTBMfREgR2p3Q25EogGAd7XkOiNRAuuIHw&s",
     ],
+  ),GameModel(
+    trueAnswer: "beverages",
+    images: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2B9a5tBeS_GfQy5xjv1ZEr8RNZkcf0HkckA&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb7U16HBsObmWZ-D819hFrve4QMsIurRRjGw&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdDnHZIswU2yTdAof3BFhH1LaS08u0NFB7gw&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdDnHZIswU2yTdAof3BFhH1LaS08u0NFB7gw&s",
+    ],
   ),
 
 ];
