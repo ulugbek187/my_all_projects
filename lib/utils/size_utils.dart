@@ -4,9 +4,9 @@ double height = 0.0;
 double width = 0.0;
 
 extension SizeUtils on int {
-  double get he => (this / 812) * height;
+  double get h => (this / 812) * height;
 
-  double get wi => (this / 375) * width;
+  double get w => (this / 375) * width;
 
   SizedBox getH() {
     return SizedBox(
