@@ -23,6 +23,10 @@ dependencies:
   firebase_auth: ^4.17.9
   flutter_bloc: ^8.1.5
   animated_widgets: ^1.1.0
+  audioplayers: ^6.0.0
+  share_plus: ^8.0.3
+  store_redirect: ^2.0.2
+  fluttertoast: ^8.2.5
 
 
 dev_dependencies:
