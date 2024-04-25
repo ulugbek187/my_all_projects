@@ -5,6 +5,7 @@ import 'package:my_all_projects/screens/arrow/arrow_screen.dart';
 import 'package:my_all_projects/screens/contact/contact_screen.dart';
 import 'package:my_all_projects/screens/home/home_screen.dart';
 import 'package:my_all_projects/screens/languages/languages_screen.dart';
+import 'package:my_all_projects/screens/platform_specefic/platform_specefic.dart';
 import 'package:my_all_projects/screens/settings/settings_screen.dart';
 import 'package:my_all_projects/screens/study/study_screen.dart';
 import 'package:my_all_projects/utils/app_colors.dart';
@@ -30,6 +31,7 @@ class _TabBox1State extends State<TabBox1> {
       const FileManagerScreen(),
       const LanguagesScreen(),
       const ContactScreen(),
+      const HelloScreen(),
     ];
     super.initState();
   }
@@ -85,6 +87,19 @@ class _TabBox1State extends State<TabBox1> {
           BottomNavigationBarItem(
             activeIcon: SvgPicture.asset(AppImages.contact),
             icon: SvgPicture.asset(AppImages.contact),
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            activeIcon: Icon(
+              Icons.info,
+              size: 25.sp,
+              color: AppColors.white,
+            ),
+            icon: Icon(
+              Icons.info,
+              size: 25.sp,
+              color: AppColors.white,
+            ),
             label: "",
           ),
         ],
