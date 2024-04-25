@@ -1,93 +1,117 @@
-import 'dart:async';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class HelloScreen extends StatefulWidget {
-  const HelloScreen({super.key});
-
   @override
-  State<HelloScreen> createState() => _HelloScreenState();
+  _HelloScreenState createState() => _HelloScreenState();
 }
 
 class _HelloScreenState extends State<HelloScreen> {
-  static const platform = MethodChannel('samples.flutter.dev/battery');
-  String _batteryLevel = 'Unknown battery level.';
+  static const platform = MethodChannel('com.example.device_info_channel');
 
-  String deviceInfo = "Device Info:";
+  String deviceType = 'Unknown';
+  String deviceModel = 'Unknown';
+  String deviceBrand = 'Unknown';
+  String osVersion = 'Unknown';
+  String batteryLevel = 'Unknown';
 
-  Future<void> _getBatteryLevel() async {
-    String batteryLevel;
+  @override
+  void initState() {
+    super.initState();
+    _getDeviceInfo();
+  }
+
+  Future<void> _getDeviceInfo() async {
     try {
-      final result = await platform.invokeMethod<int>('getBatteryLevel');
-      batteryLevel = 'Battery level at $result % .';
+      final dynamic result = await platform.invokeMethod('getDeviceInfo');
+      final Map<String, dynamic> deviceInfo = Map<String, dynamic>.from(result);
+      setState(() {
+        deviceType = deviceInfo['deviceType'] ?? 'Unknown';
+        deviceModel = deviceInfo['deviceModel'] ?? 'Unknown';
+        deviceBrand = deviceInfo['deviceBrand'] ?? 'Unknown';
+        osVersion = deviceInfo['osVersion'] ?? 'Unknown';
+        batteryLevel = deviceInfo['batteryLevel']?.toString() ?? 'Unknown';
+      });
     } on PlatformException catch (e) {
-      batteryLevel = "Failed to get battery level: '${e.message}'.";
+      debugPrint("Failed to get device info: '${e.message}'.");
     }
-
-    setState(() {
-      _batteryLevel = batteryLevel;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: const Text("Platform Specific"),
-        ),
-        body: Center(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(_batteryLevel),
-                  Text(
-                    deviceInfo,
-                    style: TextStyle(
-                      fontSize: 18),
-                  )
+      appBar: AppBar(
+        title: Text('Device Info'),
+        backgroundColor: Colors.deepPurple,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 8,
+                    spreadRadius: 4,
+                  ),
                 ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Device Info',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.deepPurple,
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    _buildDeviceInfoRow('Device Type:', deviceType),
+                    _buildDeviceInfoRow('Device Model:', deviceModel),
+                    _buildDeviceInfoRow('Device Brand:', deviceBrand),
+                    _buildDeviceInfoRow('OS Version:', osVersion),
+                    _buildDeviceInfoRow('Battery Level:', batteryLevel),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDeviceInfoRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
+          SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              value,
+              style: TextStyle(
+                fontSize: 18,
               ),
             ),
           ),
-        ),
-        floatingActionButton: SizedBox(
-          width: 120,
-          child: Row(
-            children: [
-              FloatingActionButton(
-                onPressed: () async {
-                  DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-
-                  AndroidDeviceInfo androidDeviceInfo =
-                  await deviceInfoPlugin.androidInfo;
-
-                  setState(() {
-                    deviceInfo += "ID: ${androidDeviceInfo.id}\n";
-                    deviceInfo += "VERSION: ${androidDeviceInfo.version.sdkInt}\n";
-                    deviceInfo += "TYPE: ${androidDeviceInfo.type}\n";
-                    deviceInfo += "MODEL: ${androidDeviceInfo.model}\n";
-                    deviceInfo +=
-                    "MANUFACTURER: ${androidDeviceInfo.manufacturer}\n";
-                    deviceInfo +=
-                    "SERIAL NUMBER: ${androidDeviceInfo.serialNumber}\n";
-                    deviceInfo += "DEVICE: ${androidDeviceInfo.device}\n";
-                  });
-                },
-                child: const Icon(Icons.mobile_friendly),
-              ),
-              FloatingActionButton(
-                onPressed: () {
-                  _getBatteryLevel();
-                },
-                child: const Icon(Icons.battery_0_bar),
-              ),
-            ],
-          ),
-        ),);
+        ],
+      ),
+    );
   }
 }
