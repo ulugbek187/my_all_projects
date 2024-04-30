@@ -1,8 +1,8 @@
-import '../api_provider.dart';
-import '../models/network_response.dart';
-
-class TimerModel {
-  Future<NetworkResponse> getTransActions() async {
-    return ApiProvider.fetchTransactions();
-  }
-}
+// import 'package:get_it/get_it.dart';
+// import 'package:my_all_projects/data/api_provider.dart';
+//
+// final GetIt getIt = GetIt.instance;
+//
+// void setUpDI(){
+//   getIt.registerSingleton<ApiProvider>(ApiProvider());
+// }

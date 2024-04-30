@@ -1,34 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_all_projects/cubits/currency/payment_cubit.dart';
-import '../cubits/timer/time_task_cubit.dart';
-import '../data/repositories/currency_repository.dart';
-import '../screens/helper/helper_screen.dart';
+import 'package:my_all_projects/bloc/country/country_cubit.dart';
+import 'package:my_all_projects/screens/currencies/payments_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
+    return MultiBlocProvider(
       providers: [
-        RepositoryProvider(
-          create: (_) => TimerModel(),
-        ),
+        BlocProvider(create: (_) => CountryCubit()..fetchCountries()),
       ],
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (_) => PaymentCubit(
-              timerRepository: TimerModel(),
-            )..fetchCurrencies(),
-          ),
-          BlocProvider(
-            create: (_) => TimeCubit(),
-          ),
-        ],
-        child: const MyApp(),
-      ),
+      child: const MyApp(),
     );
   }
 }
@@ -43,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const HelperScreen(),
+      home: const PaymentsScreen(),
     );
   }
 }
